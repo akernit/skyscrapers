@@ -4,7 +4,8 @@ to place buildings of different heights on the game board so that the number of
 visible buildings from a certain position (the number with the arrow is a hint)
 was equal to the number in the hint. The arrow in the tooltip indicates the
 direction in which you want to look. The address of the repository in the GitHub
-repository: https://github.com/akernit/skyscrapers
+repository:
+https://github.com/akernit/skyscrapers
 """
 
 def read_input(path: str) -> list:
@@ -13,7 +14,7 @@ def read_input(path: str) -> list:
     Return list of str.
 
     >>> read_input("check.txt")
-    ['***21**', '452453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']
+    ['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']
     """
     lst = [x.strip() for x in open('{}'.format(path), 'r').readlines()]
     return lst
