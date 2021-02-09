@@ -11,7 +11,7 @@ def read_input(path: str) -> list:
     Read game board file from the path.
     Return a list of strings.
 
-    >>> read_input("skyscrapers_state.txt")
+    >>> read_input("check.txt")
     ['***21**', '452453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']
     """
     lst = [x.strip() for x in open('{}'.format(path), 'r').readlines()]
@@ -236,11 +236,11 @@ def check_columns(board: list):
 
 def check_skyscrapers(input_path: str):
     """
-    Main function to skyscrapers_state.txt the status of the skyscraper game board.
+    Main function to check.txt the status of the skyscraper game board.
     Return True if the board status is compliant with the rules,
     False otherwise.
 
-    >>> check_skyscrapers("skyscrapers_state.txt")
+    >>> check_skyscrapers("check.txt")
     True
     """
 
@@ -320,7 +320,7 @@ def check_skyscrapers(input_path: str):
 if __name__ == "__main__":
     # 1
 
-    #print(read_input("skyscrapers_state.txt"))
+    #print(read_input("check.txt"))
     # 2
 
     print(left_to_right_check("412453*", 4))
@@ -349,4 +349,4 @@ if __name__ == "__main__":
     print(check_columns(['***21**', '412553*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']))
 
     # 7
-    print(check_skyscrapers('skyscrapers_state.txt'))
+    print(check_skyscrapers('check.txt'))
