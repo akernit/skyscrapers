@@ -12,19 +12,15 @@ def read_input(path: str) -> list:
     """
     Read game board file from path.
     Return list of str.
-
-    >>> read_input("check.txt")
-    ['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']
     """
     lst = [x.strip() for x in open('{}'.format(path), 'r').readlines()]
     return lst
 
-
 def left_to_right_check(input_line: str, pivot: int) -> bool:
     """
     Check row-wise visibility from left to right.
-    Return True if number of building from the left-most hint is visible looking to the right,
-    False otherwise.
+    Return True if number of building from the left-most hint is visible looking
+    to the right, False otherwise.
 
     input_line - representing board row.
     pivot - number on the left-most hint of the input_line.
@@ -189,6 +185,9 @@ def check_columns(board: list):
     >>> check_columns(['***21**', '412553*', '423145*', '*543215', '*35214*',\
     '*41532*', '*2*1***'])
     False
+    >>> check_columns(['***21**', '412453*', '423145*', '*542315', '*35214*',\
+    '*41532*', '*2*1***'])
+    False
     """
     if len(board) < 4:
         raise ValueError('Invalid array length was entered')
@@ -267,9 +266,6 @@ def check_skyscrapers(input_path: str):
     Main function to check.txt the status of skyscraper game board.
     Return True if the board status is compliant with the rules,
     False otherwise.
-
-    >>> check_skyscrapers("check.txt")
-    True
     """
 
     def check(_block):
