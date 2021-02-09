@@ -57,18 +57,23 @@ def left_to_right_check(input_line: str, pivot: int) -> bool:
 
 def check_not_finished_board(board: list) -> bool:
     """
-    Check if skyscraper board is not finished, i.e., '?' present on the game board.
+    Check if skyscraper board is not finished, i.e., '?' present on the game
+    board.
 
     Return True if finished, False otherwise.
 
-    >>> check_not_finished_board(['***21**', '4?????*', '4?????*', '*?????5', '*?????*', '*?????*', '*2*1***'])
+    >>> check_not_finished_board(['***21**', '4?????*', '4?????*', '*?????5',\
+    '*?????*', '*?????*', '*2*1***'])
     False
-    >>> check_not_finished_board(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***'])
+    >>> check_not_finished_board(['***21**', '412453*', '423145*', '*543215',\
+    '*35214*', '*41532*', '*2*1***'])
     True
-    >>> check_not_finished_board(['***21**', '412453*', '423145*', '*5?3215', '*35214*', '*41532*', '*2*1***'])
+    >>> check_not_finished_board(['***21**', '412453*', '423145*', '*5?3215',\
+    '*35214*', '*41532*', '*2*1***'])
     False
     """
-    board_data = "".join(element_1[1:-1] for idx, element_1 in enumerate(board) if not (idx == 1 or idx == len(board) - 1))
+    board_data = "".join(element_1[1:-1] for idx, element_1 in enumerate(board)\
+    if not (idx == 1 or idx == len(board) - 1))
     return False if board_data.count('?') > 0 else True
 
 
@@ -78,11 +83,14 @@ def check_uniqueness_in_rows(board: list) -> bool:
 
     Return True if buildings in a row have unique length, False otherwise.
 
-    >>> check_uniqueness_in_rows(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***'])
+    >>> check_uniqueness_in_rows(['***21**', '412453*', '423145*', '*543215',\
+    '*35214*', '*41532*', '*2*1***'])
     True
-    >>> check_uniqueness_in_rows(['***21**', '452453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***'])
+    >>> check_uniqueness_in_rows(['***21**', '452453*', '423145*', '*543215',\
+    '*35214*', '*41532*', '*2*1***'])
     False
-    >>> check_uniqueness_in_rows(['***21**', '412453*', '423145*', '*553215', '*35214*', '*41532*', '*2*1***'])
+    >>> check_uniqueness_in_rows(['***21**', '412453*', '423145*', '*553215',\
+    '*35214*', '*41532*', '*2*1***'])
     False
     """
 
@@ -103,11 +111,14 @@ def check_horizontal_visibility(board: list):
      i.e., for line 412453* , hint is 4, and 1245 are the four buildings
       that could be observed from the hint looking to the right.
 
-    >>> check_horizontal_visibility(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***'])
+    >>> check_horizontal_visibility(['***21**', '412453*', '423145*',\
+    '*543215', '*35214*', '*41532*', '*2*1***'])
     True
-    >>> check_horizontal_visibility(['***21**', '452453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***'])
+    >>> check_horizontal_visibility(['***21**', '452453*', '423145*',\
+    '*543215', '*35214*', '*41532*', '*2*1***'])
     False
-    >>> check_horizontal_visibility(['***21**', '452413*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***'])
+    >>> check_horizontal_visibility(['***21**', '452413*', '423145*',\
+    '*543215', '*35214*', '*41532*', '*2*1***'])
     False
     """
     if len(board) < 4:
@@ -162,15 +173,20 @@ def check_horizontal_visibility(board: list):
 
 def check_columns(board: list):
     """
-    Check column-wise compliance of the board for uniqueness (buildings of unique height) and visibility (top-bottom and vice versa).
+    Check column-wise compliance of the board for uniqueness (buildings of
+    unique height) and visibility (top-bottom and vice versa).
 
-    Same as for horizontal cases, but aggregated in one function for vertical case, i.e. columns.
+    Same as for horizontal cases, but aggregated in one function for vertical
+    case, i.e. columns.
 
-    >>> check_columns(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***'])
+    >>> check_columns(['***21**', '412453*', '423145*', '*543215', '*35214*',\
+    '*41532*', '*2*1***'])
     True
-    >>> check_columns(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41232*', '*2*1***'])
+    >>> check_columns(['***21**', '412453*', '423145*', '*542315', '*35214*',\
+    '*41532*', '*2*1***'])
     False
-    >>> check_columns(['***21**', '412553*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***'])
+    >>> check_columns(['***21**', '412553*', '423145*', '*543215', '*35214*',\
+    '*41532*', '*2*1***'])
     False
     """
     if len(board) < 4:
@@ -205,7 +221,7 @@ def check_columns(board: list):
             else:
                 continue
 
-            if pivot == 1 and not input_line:
+            if pivot == 1 and input_line:
                 return True
 
             count = 1
@@ -224,6 +240,16 @@ def check_columns(board: list):
                 return False
         return True
 
+    def is_unique(_board):
+
+        for _idx, lst in enumerate(_board):
+            if _idx in range(1, len(_board) - 1):
+                current_lst = sorted(list(set(lst[1:-1])))
+                if len(current_lst) != len(sorted(list(lst[1:-1]))):
+                    return False
+
+        return True
+
     for idx, block in enumerate(board):
 
         if block[0] == block[-1] == '*' or idx in (0, len(board)):
@@ -232,7 +258,7 @@ def check_columns(board: list):
         if not check(block):
             return False
 
-    return True
+    return True and is_unique(board)
 
 
 def check_skyscrapers(input_path: str):
@@ -283,7 +309,8 @@ def check_skyscrapers(input_path: str):
 
     rows = [x.strip() for x in open('{}'.format(input_path), 'r').readlines()]
 
-    main_board_data = "".join(element_1[1:-1] for idx, element_1 in enumerate(rows) if not (idx == 1 or idx == len(rows) - 1))
+    main_board_data = "".join(element_1[1:-1] for idx, element_1 in\
+    enumerate(rows) if not (idx == 1 or idx == len(rows) - 1))
     if main_board_data.count('?') > 0:
         return False
 
